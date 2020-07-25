@@ -5,14 +5,11 @@ import { RecoilRoot } from "recoil";
 import "./index.css";
 import { App } from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { TeamsProvider } from "shared/contexts/TeamsProvider";
 
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
-      <TeamsProvider>
-        <App />
-      </TeamsProvider>
+      <App />
     </RecoilRoot>
   </React.StrictMode>,
   document.getElementById("root")
