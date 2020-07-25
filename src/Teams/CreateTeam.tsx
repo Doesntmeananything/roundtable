@@ -13,14 +13,24 @@ import {
 import Add from "@spectrum-icons/workflow/Add";
 import UsersShare from "@spectrum-icons/workflow/UsersShare";
 
-import { db } from "shared/db";
+import { useSetRecoilState } from "recoil";
+import { currentTeams } from "shared/atoms/teams";
+import { useHistory } from "react-router-dom";
 
 export const CreateTeam = () => {
   const [teamName, setTeamName] = useState("");
   const [teamDescription, setTeamDescription] = useState("");
 
+  const createTeam = useSetRecoilState(currentTeams);
+
+  const history = useHistory();
+
   const handleCreatingTeam = () => {
-    db.createTeam(teamName, teamDescription);
+    createTeam((teams) => [
+      { name: teamName, description: teamDescription },
+      ...teams,
+    ]);
+    history.goBack();
   };
 
   return (
@@ -38,15 +48,15 @@ export const CreateTeam = () => {
             autoFocus
             label="Team Name"
             placeholder="The A-Team"
-            maxLength={32}
+            maxLength={20}
             value={teamName}
             onChange={setTeamName}
           />
           <TextArea
             isRequired={false}
             label="Team Description"
-            placeholder="A team of ex-special forces soldiers on the lam from the military police."
-            maxLength={200}
+            placeholder="Soldiers of fortune."
+            maxLength={30}
             value={teamDescription}
             onChange={setTeamDescription}
           />

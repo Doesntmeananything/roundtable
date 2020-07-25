@@ -1,17 +1,24 @@
 import React from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 
-import { NoTeams } from "./NoTeams";
 import { CreateTeam } from "./CreateTeam";
+import { TeamsList } from "./TeamsList";
+import { PeopleList } from "./PeopleList";
 
 export const Teams = () => {
   const match = useRouteMatch();
+
   return (
-    <Switch>
-      <Route path={`${match.path}/create`}>
-        <CreateTeam />
-      </Route>
-      <NoTeams />
-    </Switch>
+    <React.Suspense fallback={<div>Loading...</div>}>
+      <Switch>
+        <Route path={`${match.path}/create-team`}>
+          <CreateTeam />
+        </Route>
+        <>
+          <TeamsList />
+          <PeopleList />
+        </>
+      </Switch>
+    </React.Suspense>
   );
 };
