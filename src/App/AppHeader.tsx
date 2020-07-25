@@ -11,7 +11,9 @@ export const AppHeader = () => {
   const [colorScheme, setColorScheme] = useRecoilState(colorSchemeState);
 
   const handlePress = () => {
-    setColorScheme(colorScheme === "light" ? "dark" : "light");
+    setColorScheme((colorScheme) =>
+      colorScheme === "light" ? "dark" : "light"
+    );
   };
 
   return (
