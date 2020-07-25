@@ -1,16 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { RecoilRoot } from "recoil";
 
 import "./index.css";
 import { App } from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { ColorSchemeProvider } from "./App/ColorSchemeProvider";
+import { TeamsProvider } from "shared/contexts/TeamsProvider";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ColorSchemeProvider>
-      <App />
-    </ColorSchemeProvider>
+    <RecoilRoot>
+      <TeamsProvider>
+        <App />
+      </TeamsProvider>
+    </RecoilRoot>
   </React.StrictMode>,
   document.getElementById("root")
 );

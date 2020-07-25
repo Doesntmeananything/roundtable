@@ -1,17 +1,19 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Provider, defaultTheme, Grid, View } from "@adobe/react-spectrum";
 import { BrowserRouter as Router } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 
 import { AppHeader } from "./AppHeader";
 import { AppSidebar } from "./AppSidebar";
 import { AppFooter } from "./AppFooter";
 import { AppContent } from "./AppContent";
-import { ColorSchemeContext } from "./ColorSchemeProvider";
+import { colorSchemeState } from "shared/atoms/colorScheme";
 
 export const App = () => {
-  const colorContext = useContext(ColorSchemeContext);
+  const colorScheme = useRecoilValue(colorSchemeState);
+
   return (
-    <Provider theme={defaultTheme} colorScheme={colorContext.colorScheme}>
+    <Provider theme={defaultTheme} colorScheme={colorScheme}>
       <Router>
         <Grid
           areas={["header  header", "sidebar content", "sidebar  footer"]}

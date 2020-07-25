@@ -1,16 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useRecoilState } from "recoil";
 import { Heading, Flex, ActionButton } from "@adobe/react-spectrum";
 import HeaderIcon from "@spectrum-icons/workflow/GraphPie";
 import Light from "@spectrum-icons/workflow/Light";
 import Moon from "@spectrum-icons/workflow/Moon";
 
-import { ColorSchemeContext } from "./ColorSchemeProvider";
+import { colorSchemeState } from "shared/atoms/colorScheme";
 
 export const AppHeader = () => {
-  const colorContext = useContext(ColorSchemeContext);
+  const [colorScheme, setColorScheme] = useRecoilState(colorSchemeState);
 
   const handlePress = () => {
-    colorContext.toggleScheme();
+    setColorScheme(colorScheme === "light" ? "dark" : "light");
   };
 
   return (
@@ -20,7 +21,7 @@ export const AppHeader = () => {
         <Heading level={1}>Roundtable</Heading>
       </Flex>
       <ActionButton onPress={handlePress}>
-        {colorContext.colorScheme === "light" ? <Moon /> : <Light />}
+        {colorScheme === "light" ? <Moon /> : <Light />}
       </ActionButton>
     </Flex>
   );
